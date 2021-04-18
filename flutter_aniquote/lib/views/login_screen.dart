@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -6,6 +7,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,6 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: EdgeInsets.only(left: 34, right: 34),
             alignment: Alignment.center,
             child: TextField(
+              controller: this._emailController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
@@ -53,6 +59,8 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: EdgeInsets.only(left: 34, right: 34),
             alignment: Alignment.center,
             child: TextField(
+              controller: this._passwordController,
+              obscureText: true,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
@@ -79,7 +87,34 @@ class _LoginScreenState extends State<LoginScreen> {
                 backgroundColor: MaterialStateProperty.all(Color(0xFFE20264)),
               ),
               child: Text("Login", style: TextStyle(fontFamily: "Nunito", fontSize: 18, fontWeight: FontWeight.w700, color: Colors.white),),
-              onPressed: (){},
+              onPressed: () async{
+                try {
+                  await this._firebaseAuth.signInWithEmailAndPassword(
+                    email: this._emailController.text,
+                    password: this._passwordController.text
+                  ).then((value) => {
+                    Navigator.pushReplacementNamed(context, '/home')
+                  });
+                } catch (e) {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text("Error"),
+                        content: Text(e.message),
+                        actions: [
+                          TextButton(
+                            child: Text("Ok"),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          )
+                        ],
+                      );
+                    }
+                  );
+                }
+              }
             ),
           ),
           Container(
@@ -109,7 +144,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 backgroundColor: MaterialStateProperty.all(Color(0xFF2F4858).withOpacity(0.71)),
               ),
               child: Text("Create an Account", style: TextStyle(fontFamily: "Nunito", fontSize: 18, fontWeight: FontWeight.w700, color: Colors.white),),
-              onPressed: (){},
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/register');
+              },
             ),
           ),
         ],

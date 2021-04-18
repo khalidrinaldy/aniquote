@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "249223301151",
+    "project_id": "aniquote-eeb50",
+    "storage_bucket": "aniquote-eeb50.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:249223301151:android:9d152034d38d0a9b37ad2a",
+        "android_client_info": {
+          "package_name": "com.example.flutter_aniquote"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "249223301151-ai8i4r1g60cmmshmp7us31f7ajhohd9j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAENlv573-IDiP7_6Ajyv4HKmhDggCFwg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "249223301151-ai8i4r1g60cmmshmp7us31f7ajhohd9j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
